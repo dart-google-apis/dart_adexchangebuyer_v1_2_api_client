@@ -184,13 +184,13 @@ class Creative {
   core.int accountId;
 
   /** Detected advertiser id, if any. Read-only. This field should not be set in requests. */
-  core.List<core.String> advertiserId;
+  core.List<core.int> advertiserId;
 
   /** The name of the company being advertised in the creative. */
   core.String advertiserName;
 
   /** The agency id for this creative. */
-  core.String agencyId;
+  core.int agencyId;
 
   /** All attributes for the ads that may be shown from this snippet. */
   core.List<core.int> attribute;
@@ -498,25 +498,25 @@ class DirectDeal {
   core.String currencyCode;
 
   /** End time for when this deal stops being active. If not set then this deal is valid until manually disabled by the publisher. In seconds since the epoch. */
-  core.String endTime;
+  core.int endTime;
 
   /** The fixed price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the fixed price tier of buying (highest priority, pay exactly the configured fixed price). */
-  core.String fixedCpm;
+  core.int fixedCpm;
 
   /** Deal id. */
-  core.String id;
+  core.int id;
 
   /** Resource type. */
   core.String kind;
 
   /** The minimum price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the private exchange tier of buying (below fixed price priority, run as a second price auction). */
-  core.String privateExchangeMinCpm;
+  core.int privateExchangeMinCpm;
 
   /** The name of the publisher offering this direct deal. */
   core.String sellerNetwork;
 
   /** Start time for when this deal becomes active. If not set then this deal is active immediately upon creation. In seconds since the epoch. */
-  core.String startTime;
+  core.int startTime;
 
   /** Create new DirectDeal from JSON data */
   DirectDeal.fromJson(core.Map json) {
