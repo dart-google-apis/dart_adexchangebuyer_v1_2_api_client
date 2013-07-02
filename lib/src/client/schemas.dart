@@ -246,7 +246,11 @@ class Creative {
       advertiserName = json["advertiserName"];
     }
     if (json.containsKey("agencyId")) {
-      agencyId = json["agencyId"];
+      if(json["agencyId"] is core.String){
+        agencyId = core.int.parse(json["agencyId"]);
+      }else{
+        agencyId = json["agencyId"];
+      }
     }
     if (json.containsKey("attribute")) {
       attribute = [];
@@ -530,25 +534,45 @@ class DirectDeal {
       currencyCode = json["currencyCode"];
     }
     if (json.containsKey("endTime")) {
-      endTime = json["endTime"];
+      if(json["endTime"] is core.String){
+        endTime = core.int.parse(json["endTime"]);
+      }else{
+        endTime = json["endTime"];
+      }
     }
     if (json.containsKey("fixedCpm")) {
-      fixedCpm = json["fixedCpm"];
+      if(json["fixedCpm"] is core.String){
+        fixedCpm = core.int.parse(json["fixedCpm"]);
+      }else{
+        fixedCpm = json["fixedCpm"];
+      }
     }
     if (json.containsKey("id")) {
-      id = json["id"];
+      if(json["id"] is core.String){
+        id = core.int.parse(json["id"]);
+      }else{
+        id = json["id"];
+      }
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
     }
     if (json.containsKey("privateExchangeMinCpm")) {
-      privateExchangeMinCpm = json["privateExchangeMinCpm"];
+      if(json["privateExchangeMinCpm"] is core.String){
+        privateExchangeMinCpm = core.int.parse(json["privateExchangeMinCpm"]);
+      }else{
+        privateExchangeMinCpm = json["privateExchangeMinCpm"];
+      }
     }
     if (json.containsKey("sellerNetwork")) {
       sellerNetwork = json["sellerNetwork"];
     }
     if (json.containsKey("startTime")) {
-      startTime = json["startTime"];
+      if(json["startTime"] is core.String){
+        startTime = core.int.parse(json["startTime"]);
+      }else{
+        startTime = json["startTime"];
+      }
     }
   }
 
