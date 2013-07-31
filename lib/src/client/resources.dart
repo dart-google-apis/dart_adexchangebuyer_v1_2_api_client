@@ -1,9 +1,11 @@
-part of adexchangebuyer_v1_2_api_client;
+part of adexchangebuyer_v1_2_api;
 
-class AccountsResource_ extends Resource {
+class AccountsResource_ {
 
-  AccountsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsResource_(Client client) :
+      _client = client;
 
   /**
    * Gets one account by ID.
@@ -138,10 +140,12 @@ class AccountsResource_ extends Resource {
   }
 }
 
-class CreativesResource_ extends Resource {
+class CreativesResource_ {
 
-  CreativesResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  CreativesResource_(Client client) :
+      _client = client;
 
   /**
    * Gets the status for a single creative.
@@ -259,10 +263,12 @@ class CreativesResource_ extends Resource {
   }
 }
 
-class DirectDealsResource_ extends Resource {
+class DirectDealsResource_ {
 
-  DirectDealsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  DirectDealsResource_(Client client) :
+      _client = client;
 
   /**
    * Gets one direct deal by ID.
@@ -324,6 +330,55 @@ class DirectDealsResource_ extends Resource {
     response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
     return response
       .then((data) => new DirectDealsList.fromJson(data));
+  }
+}
+
+class PerformanceReportResource_ {
+
+  final Client _client;
+
+  PerformanceReportResource_(Client client) :
+      _client = client;
+
+  /**
+   * Retrieves the authenticated user's list of performance metrics.
+   *
+   * [accountId] - The account id to get the reports for.
+   *
+   * [endDateTime] - The end time for the reports.
+   *
+   * [startDateTime] - The start time for the reports.
+   *
+   * [optParams] - Additional query parameters
+   */
+  async.Future<PerformanceReportList> list(core.int accountId, core.int endDateTime, core.int startDateTime, {core.Map optParams}) {
+    var url = "performancereport";
+    var urlParams = new core.Map();
+    var queryParams = new core.Map();
+
+    var paramErrors = new core.List();
+    if (accountId == null) paramErrors.add("accountId is required");
+    if (accountId != null) queryParams["accountId"] = accountId;
+    if (endDateTime == null) paramErrors.add("endDateTime is required");
+    if (endDateTime != null) queryParams["endDateTime"] = endDateTime;
+    if (startDateTime == null) paramErrors.add("startDateTime is required");
+    if (startDateTime != null) queryParams["startDateTime"] = startDateTime;
+    if (optParams != null) {
+      optParams.forEach((key, value) {
+        if (value != null && queryParams[key] == null) {
+          queryParams[key] = value;
+        }
+      });
+    }
+
+    if (!paramErrors.isEmpty) {
+      throw new core.ArgumentError(paramErrors.join(" / "));
+    }
+
+    var response;
+    response = _client.request(url, "GET", urlParams: urlParams, queryParams: queryParams);
+    return response
+      .then((data) => new PerformanceReportList.fromJson(data));
   }
 }
 

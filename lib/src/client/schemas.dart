@@ -1,4 +1,4 @@
-part of adexchangebuyer_v1_2_api_client;
+part of adexchangebuyer_v1_2_api;
 
 /** Configuration data for an Ad Exchange buyer account. */
 class Account {
@@ -24,10 +24,7 @@ class Account {
   /** Create new Account from JSON data */
   Account.fromJson(core.Map json) {
     if (json.containsKey("bidderLocation")) {
-      bidderLocation = [];
-      json["bidderLocation"].forEach((item) {
-        bidderLocation.add(new AccountBidderLocation.fromJson(item));
-      });
+      bidderLocation = json["bidderLocation"].map((bidderLocationItem) => new AccountBidderLocation.fromJson(bidderLocationItem)).toList();
     }
     if (json.containsKey("cookieMatchingNid")) {
       cookieMatchingNid = json["cookieMatchingNid"];
@@ -51,10 +48,7 @@ class Account {
     var output = new core.Map();
 
     if (bidderLocation != null) {
-      output["bidderLocation"] = new core.List();
-      bidderLocation.forEach((item) {
-        output["bidderLocation"].add(item.toJson());
-      });
+      output["bidderLocation"] = bidderLocation.map((bidderLocationItem) => bidderLocationItem.toJson()).toList();
     }
     if (cookieMatchingNid != null) {
       output["cookieMatchingNid"] = cookieMatchingNid;
@@ -142,10 +136,7 @@ class AccountsList {
   /** Create new AccountsList from JSON data */
   AccountsList.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Account.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Account.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -157,10 +148,7 @@ class AccountsList {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -237,41 +225,25 @@ class Creative {
       accountId = json["accountId"];
     }
     if (json.containsKey("advertiserId")) {
-      advertiserId = [];
-      json["advertiserId"].forEach((item) {
-        advertiserId.add(item);
-      });
+      advertiserId = json["advertiserId"].map((advertiserIdItem) => (advertiserIdItem is core.String) ? core.int.parse(advertiserIdItem) : advertiserIdItem).toList();
     }
     if (json.containsKey("advertiserName")) {
       advertiserName = json["advertiserName"];
     }
     if (json.containsKey("agencyId")) {
-      if(json["agencyId"] is core.String){
-        agencyId = core.int.parse(json["agencyId"]);
-      }else{
-        agencyId = json["agencyId"];
-      }
+      agencyId = (json["agencyId"] is core.String) ? core.int.parse(json["agencyId"]) : json["agencyId"];
     }
     if (json.containsKey("attribute")) {
-      attribute = [];
-      json["attribute"].forEach((item) {
-        attribute.add(item);
-      });
+      attribute = json["attribute"].toList();
     }
     if (json.containsKey("buyerCreativeId")) {
       buyerCreativeId = json["buyerCreativeId"];
     }
     if (json.containsKey("clickThroughUrl")) {
-      clickThroughUrl = [];
-      json["clickThroughUrl"].forEach((item) {
-        clickThroughUrl.add(item);
-      });
+      clickThroughUrl = json["clickThroughUrl"].toList();
     }
     if (json.containsKey("disapprovalReasons")) {
-      disapprovalReasons = [];
-      json["disapprovalReasons"].forEach((item) {
-        disapprovalReasons.add(new CreativeDisapprovalReasons.fromJson(item));
-      });
+      disapprovalReasons = json["disapprovalReasons"].map((disapprovalReasonsItem) => new CreativeDisapprovalReasons.fromJson(disapprovalReasonsItem)).toList();
     }
     if (json.containsKey("height")) {
       height = json["height"];
@@ -280,25 +252,16 @@ class Creative {
       kind = json["kind"];
     }
     if (json.containsKey("productCategories")) {
-      productCategories = [];
-      json["productCategories"].forEach((item) {
-        productCategories.add(item);
-      });
+      productCategories = json["productCategories"].toList();
     }
     if (json.containsKey("sensitiveCategories")) {
-      sensitiveCategories = [];
-      json["sensitiveCategories"].forEach((item) {
-        sensitiveCategories.add(item);
-      });
+      sensitiveCategories = json["sensitiveCategories"].toList();
     }
     if (json.containsKey("status")) {
       status = json["status"];
     }
     if (json.containsKey("vendorType")) {
-      vendorType = [];
-      json["vendorType"].forEach((item) {
-        vendorType.add(item);
-      });
+      vendorType = json["vendorType"].toList();
     }
     if (json.containsKey("videoURL")) {
       videoURL = json["videoURL"];
@@ -319,10 +282,7 @@ class Creative {
       output["accountId"] = accountId;
     }
     if (advertiserId != null) {
-      output["advertiserId"] = new core.List();
-      advertiserId.forEach((item) {
-        output["advertiserId"].add(item);
-      });
+      output["advertiserId"] = advertiserId.toList();
     }
     if (advertiserName != null) {
       output["advertiserName"] = advertiserName;
@@ -331,25 +291,16 @@ class Creative {
       output["agencyId"] = agencyId;
     }
     if (attribute != null) {
-      output["attribute"] = new core.List();
-      attribute.forEach((item) {
-        output["attribute"].add(item);
-      });
+      output["attribute"] = attribute.toList();
     }
     if (buyerCreativeId != null) {
       output["buyerCreativeId"] = buyerCreativeId;
     }
     if (clickThroughUrl != null) {
-      output["clickThroughUrl"] = new core.List();
-      clickThroughUrl.forEach((item) {
-        output["clickThroughUrl"].add(item);
-      });
+      output["clickThroughUrl"] = clickThroughUrl.toList();
     }
     if (disapprovalReasons != null) {
-      output["disapprovalReasons"] = new core.List();
-      disapprovalReasons.forEach((item) {
-        output["disapprovalReasons"].add(item.toJson());
-      });
+      output["disapprovalReasons"] = disapprovalReasons.map((disapprovalReasonsItem) => disapprovalReasonsItem.toJson()).toList();
     }
     if (height != null) {
       output["height"] = height;
@@ -358,25 +309,16 @@ class Creative {
       output["kind"] = kind;
     }
     if (productCategories != null) {
-      output["productCategories"] = new core.List();
-      productCategories.forEach((item) {
-        output["productCategories"].add(item);
-      });
+      output["productCategories"] = productCategories.toList();
     }
     if (sensitiveCategories != null) {
-      output["sensitiveCategories"] = new core.List();
-      sensitiveCategories.forEach((item) {
-        output["sensitiveCategories"].add(item);
-      });
+      output["sensitiveCategories"] = sensitiveCategories.toList();
     }
     if (status != null) {
       output["status"] = status;
     }
     if (vendorType != null) {
-      output["vendorType"] = new core.List();
-      vendorType.forEach((item) {
-        output["vendorType"].add(item);
-      });
+      output["vendorType"] = vendorType.toList();
     }
     if (videoURL != null) {
       output["videoURL"] = videoURL;
@@ -404,10 +346,7 @@ class CreativeDisapprovalReasons {
   /** Create new CreativeDisapprovalReasons from JSON data */
   CreativeDisapprovalReasons.fromJson(core.Map json) {
     if (json.containsKey("details")) {
-      details = [];
-      json["details"].forEach((item) {
-        details.add(item);
-      });
+      details = json["details"].toList();
     }
     if (json.containsKey("reason")) {
       reason = json["reason"];
@@ -419,10 +358,7 @@ class CreativeDisapprovalReasons {
     var output = new core.Map();
 
     if (details != null) {
-      output["details"] = new core.List();
-      details.forEach((item) {
-        output["details"].add(item);
-      });
+      output["details"] = details.toList();
     }
     if (reason != null) {
       output["reason"] = reason;
@@ -451,10 +387,7 @@ class CreativesList {
   /** Create new CreativesList from JSON data */
   CreativesList.fromJson(core.Map json) {
     if (json.containsKey("items")) {
-      items = [];
-      json["items"].forEach((item) {
-        items.add(new Creative.fromJson(item));
-      });
+      items = json["items"].map((itemsItem) => new Creative.fromJson(itemsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -469,10 +402,7 @@ class CreativesList {
     var output = new core.Map();
 
     if (items != null) {
-      output["items"] = new core.List();
-      items.forEach((item) {
-        output["items"].add(item.toJson());
-      });
+      output["items"] = items.map((itemsItem) => itemsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -534,45 +464,25 @@ class DirectDeal {
       currencyCode = json["currencyCode"];
     }
     if (json.containsKey("endTime")) {
-      if(json["endTime"] is core.String){
-        endTime = core.int.parse(json["endTime"]);
-      }else{
-        endTime = json["endTime"];
-      }
+      endTime = (json["endTime"] is core.String) ? core.int.parse(json["endTime"]) : json["endTime"];
     }
     if (json.containsKey("fixedCpm")) {
-      if(json["fixedCpm"] is core.String){
-        fixedCpm = core.int.parse(json["fixedCpm"]);
-      }else{
-        fixedCpm = json["fixedCpm"];
-      }
+      fixedCpm = (json["fixedCpm"] is core.String) ? core.int.parse(json["fixedCpm"]) : json["fixedCpm"];
     }
     if (json.containsKey("id")) {
-      if(json["id"] is core.String){
-        id = core.int.parse(json["id"]);
-      }else{
-        id = json["id"];
-      }
+      id = (json["id"] is core.String) ? core.int.parse(json["id"]) : json["id"];
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
     }
     if (json.containsKey("privateExchangeMinCpm")) {
-      if(json["privateExchangeMinCpm"] is core.String){
-        privateExchangeMinCpm = core.int.parse(json["privateExchangeMinCpm"]);
-      }else{
-        privateExchangeMinCpm = json["privateExchangeMinCpm"];
-      }
+      privateExchangeMinCpm = (json["privateExchangeMinCpm"] is core.String) ? core.int.parse(json["privateExchangeMinCpm"]) : json["privateExchangeMinCpm"];
     }
     if (json.containsKey("sellerNetwork")) {
       sellerNetwork = json["sellerNetwork"];
     }
     if (json.containsKey("startTime")) {
-      if(json["startTime"] is core.String){
-        startTime = core.int.parse(json["startTime"]);
-      }else{
-        startTime = json["startTime"];
-      }
+      startTime = (json["startTime"] is core.String) ? core.int.parse(json["startTime"]) : json["startTime"];
     }
   }
 
@@ -631,10 +541,7 @@ class DirectDealsList {
   /** Create new DirectDealsList from JSON data */
   DirectDealsList.fromJson(core.Map json) {
     if (json.containsKey("directDeals")) {
-      directDeals = [];
-      json["directDeals"].forEach((item) {
-        directDeals.add(new DirectDeal.fromJson(item));
-      });
+      directDeals = json["directDeals"].map((directDealsItem) => new DirectDeal.fromJson(directDealsItem)).toList();
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
@@ -646,10 +553,7 @@ class DirectDealsList {
     var output = new core.Map();
 
     if (directDeals != null) {
-      output["directDeals"] = new core.List();
-      directDeals.forEach((item) {
-        output["directDeals"].add(item.toJson());
-      });
+      output["directDeals"] = directDeals.map((directDealsItem) => directDealsItem.toJson()).toList();
     }
     if (kind != null) {
       output["kind"] = kind;
@@ -663,3 +567,125 @@ class DirectDealsList {
 
 }
 
+/** The configuration data for an Ad Exchange performance report list. TODO(nathanbullock): need to add some release tests before releasing this. https://sites.google.com/a/google.com/adx-integration/Home/engineering/binary-releases/rtb-api-release https://cs.corp.google.com/#piper///depot/google3/contentads/adx/tools/rtb_api/adxrtb.py */
+class PerformanceReportList {
+
+  /** Resource type. */
+  core.String kind;
+
+  /** A list of performance reports relevant for the account. */
+  core.List<PerformanceReportListPerformance_report> performance_report;
+
+  /** Create new PerformanceReportList from JSON data */
+  PerformanceReportList.fromJson(core.Map json) {
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("performance_report")) {
+      performance_report = json["performance_report"].map((performance_reportItem) => new PerformanceReportListPerformance_report.fromJson(performance_reportItem)).toList();
+    }
+  }
+
+  /** Create JSON Object for PerformanceReportList */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (performance_report != null) {
+      output["performance_report"] = performance_report.map((performance_reportItem) => performance_reportItem.toJson()).toList();
+    }
+
+    return output;
+  }
+
+  /** Return String representation of PerformanceReportList */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+class PerformanceReportListPerformance_report {
+
+  /** Resource type. */
+  core.String kind;
+
+  /** The Nth percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report. */
+  core.num latency50thPercentile;
+
+  core.num latency85thPercentile;
+
+  core.num latency95thPercentile;
+
+  /** The trading location of this data. */
+  core.String region;
+
+  /** Timestamp of the starting time of this performance data. */
+  core.int timestamp;
+
+  /** Create new PerformanceReportListPerformance_report from JSON data */
+  PerformanceReportListPerformance_report.fromJson(core.Map json) {
+    if (json.containsKey("kind")) {
+      kind = json["kind"];
+    }
+    if (json.containsKey("latency50thPercentile")) {
+      latency50thPercentile = json["latency50thPercentile"];
+    }
+    if (json.containsKey("latency85thPercentile")) {
+      latency85thPercentile = json["latency85thPercentile"];
+    }
+    if (json.containsKey("latency95thPercentile")) {
+      latency95thPercentile = json["latency95thPercentile"];
+    }
+    if (json.containsKey("region")) {
+      region = json["region"];
+    }
+    if (json.containsKey("timestamp")) {
+      timestamp = (json["timestamp"] is core.String) ? core.int.parse(json["timestamp"]) : json["timestamp"];
+    }
+  }
+
+  /** Create JSON Object for PerformanceReportListPerformance_report */
+  core.Map toJson() {
+    var output = new core.Map();
+
+    if (kind != null) {
+      output["kind"] = kind;
+    }
+    if (latency50thPercentile != null) {
+      output["latency50thPercentile"] = latency50thPercentile;
+    }
+    if (latency85thPercentile != null) {
+      output["latency85thPercentile"] = latency85thPercentile;
+    }
+    if (latency95thPercentile != null) {
+      output["latency95thPercentile"] = latency95thPercentile;
+    }
+    if (region != null) {
+      output["region"] = region;
+    }
+    if (timestamp != null) {
+      output["timestamp"] = timestamp;
+    }
+
+    return output;
+  }
+
+  /** Return String representation of PerformanceReportListPerformance_report */
+  core.String toString() => JSON.stringify(this.toJson());
+
+}
+
+core.Map _mapMap(core.Map source, [core.Object convert(core.Object source) = null]) {
+  assert(source != null);
+  var result = new dart_collection.LinkedHashMap();
+  source.forEach((core.String key, value) {
+    assert(key != null);
+    if(convert == null) {
+      result[key] = value;
+    } else {
+      result[key] = convert(value);
+    }
+  });
+  return result;
+}
