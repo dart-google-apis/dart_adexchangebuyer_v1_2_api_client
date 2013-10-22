@@ -343,15 +343,21 @@ class PerformanceReportResource_ {
   /**
    * Retrieves the authenticated user's list of performance metrics.
    *
-   * [accountId] - The account id to get the reports for.
+   * [accountId] - The account id to get the reports.
    *
-   * [endDateTime] - The end time for the reports.
+   * [endDateTime] - The end time of the report in ISO 8601 timestamp format using UTC.
    *
-   * [startDateTime] - The start time for the reports.
+   * [startDateTime] - The start time of the report in ISO 8601 timestamp format using UTC.
+   *
+   * [maxResults] - Maximum number of entries returned on one result page. If not set, the default is 100. Optional.
+   *   Minimum: 1
+   *   Maximum: 1000
+   *
+   * [pageToken] - A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<PerformanceReportList> list(core.int accountId, core.int endDateTime, core.int startDateTime, {core.Map optParams}) {
+  async.Future<PerformanceReportList> list(core.int accountId, core.String endDateTime, core.String startDateTime, {core.int maxResults, core.String pageToken, core.Map optParams}) {
     var url = "performancereport";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -361,6 +367,8 @@ class PerformanceReportResource_ {
     if (accountId != null) queryParams["accountId"] = accountId;
     if (endDateTime == null) paramErrors.add("endDateTime is required");
     if (endDateTime != null) queryParams["endDateTime"] = endDateTime;
+    if (maxResults != null) queryParams["maxResults"] = maxResults;
+    if (pageToken != null) queryParams["pageToken"] = pageToken;
     if (startDateTime == null) paramErrors.add("startDateTime is required");
     if (startDateTime != null) queryParams["startDateTime"] = startDateTime;
     if (optParams != null) {
