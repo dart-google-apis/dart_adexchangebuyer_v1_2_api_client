@@ -498,6 +498,9 @@ class DirectDeal {
   /** Resource type. */
   core.String kind;
 
+  /** Deal name. */
+  core.String name;
+
   /** The minimum price for this direct deal. In cpm micros of currency according to currency_code. If set, then this deal is eligible for the private exchange tier of buying (below fixed price priority, run as a second price auction). */
   core.int privateExchangeMinCpm;
 
@@ -529,6 +532,9 @@ class DirectDeal {
     }
     if (json.containsKey("kind")) {
       kind = json["kind"];
+    }
+    if (json.containsKey("name")) {
+      name = json["name"];
     }
     if (json.containsKey("privateExchangeMinCpm")) {
       privateExchangeMinCpm = (json["privateExchangeMinCpm"] is core.String) ? core.int.parse(json["privateExchangeMinCpm"]) : json["privateExchangeMinCpm"];
@@ -565,6 +571,9 @@ class DirectDeal {
     }
     if (kind != null) {
       output["kind"] = kind;
+    }
+    if (name != null) {
+      output["name"] = name;
     }
     if (privateExchangeMinCpm != null) {
       output["privateExchangeMinCpm"] = privateExchangeMinCpm;
@@ -618,208 +627,6 @@ class DirectDealsList {
   }
 
   /** Return String representation of DirectDealsList */
-  core.String toString() => JSON.encode(this.toJson());
-
-}
-
-/** The configuration data for an Ad Exchange performance report list. TODO(nathanbullock): need to add some release tests before releasing this. https://sites.google.com/a/google.com/adx-integration/Home/engineering/binary-releases/rtb-api-release https://cs.corp.google.com/#piper///depot/google3/contentads/adx/tools/rtb_api/adxrtb.py */
-class PerformanceReport {
-
-  /** Rate of various prefiltering statuses per match. Please refer to the callout-status-codes.txt file for different statuses. */
-  core.List<core.Object> calloutStatusRate;
-
-  /** Average QPS for cookie matcher operations. */
-  core.List<core.Object> cookieMatcherStatusRate;
-
-  /** Rate of ads with a given status. Please refer to the creative-status-codes.txt file for different statuses. */
-  core.List<core.Object> creativeStatusRate;
-
-  /** Average QPS for hosted match operations. */
-  core.List<core.Object> hostedMatchStatusRate;
-
-  /** Resource type. */
-  core.String kind;
-
-  /** The 50th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report. */
-  core.num latency50thPercentile;
-
-  /** The 85th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report. */
-  core.num latency85thPercentile;
-
-  /** The 95th percentile round trip latency(ms) as perceived from Google servers for the duration period covered by the report. */
-  core.num latency95thPercentile;
-
-  /** Rate of various quota account statuses per quota check. */
-  core.num noQuotaInRegion;
-
-  /** Rate of various quota account statuses per quota check. */
-  core.num outOfQuota;
-
-  /** Average QPS for pixel match requests from clients. */
-  core.num pixelMatchRequests;
-
-  /** Average QPS for pixel match responses from clients. */
-  core.num pixelMatchResponses;
-
-  /** The configured quota limits for this account. */
-  core.num quotaConfiguredLimit;
-
-  /** The throttled quota limits for this account. */
-  core.num quotaThrottledLimit;
-
-  /** The trading location of this data. */
-  core.String region;
-
-  /** The unix timestamp of the starting time of this performance data. */
-  core.int timestamp;
-
-  /** Create new PerformanceReport from JSON data */
-  PerformanceReport.fromJson(core.Map json) {
-    if (json.containsKey("calloutStatusRate")) {
-      calloutStatusRate = json["calloutStatusRate"].toList();
-    }
-    if (json.containsKey("cookieMatcherStatusRate")) {
-      cookieMatcherStatusRate = json["cookieMatcherStatusRate"].toList();
-    }
-    if (json.containsKey("creativeStatusRate")) {
-      creativeStatusRate = json["creativeStatusRate"].toList();
-    }
-    if (json.containsKey("hostedMatchStatusRate")) {
-      hostedMatchStatusRate = json["hostedMatchStatusRate"].toList();
-    }
-    if (json.containsKey("kind")) {
-      kind = json["kind"];
-    }
-    if (json.containsKey("latency50thPercentile")) {
-      latency50thPercentile = json["latency50thPercentile"];
-    }
-    if (json.containsKey("latency85thPercentile")) {
-      latency85thPercentile = json["latency85thPercentile"];
-    }
-    if (json.containsKey("latency95thPercentile")) {
-      latency95thPercentile = json["latency95thPercentile"];
-    }
-    if (json.containsKey("noQuotaInRegion")) {
-      noQuotaInRegion = json["noQuotaInRegion"];
-    }
-    if (json.containsKey("outOfQuota")) {
-      outOfQuota = json["outOfQuota"];
-    }
-    if (json.containsKey("pixelMatchRequests")) {
-      pixelMatchRequests = json["pixelMatchRequests"];
-    }
-    if (json.containsKey("pixelMatchResponses")) {
-      pixelMatchResponses = json["pixelMatchResponses"];
-    }
-    if (json.containsKey("quotaConfiguredLimit")) {
-      quotaConfiguredLimit = json["quotaConfiguredLimit"];
-    }
-    if (json.containsKey("quotaThrottledLimit")) {
-      quotaThrottledLimit = json["quotaThrottledLimit"];
-    }
-    if (json.containsKey("region")) {
-      region = json["region"];
-    }
-    if (json.containsKey("timestamp")) {
-      timestamp = (json["timestamp"] is core.String) ? core.int.parse(json["timestamp"]) : json["timestamp"];
-    }
-  }
-
-  /** Create JSON Object for PerformanceReport */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (calloutStatusRate != null) {
-      output["calloutStatusRate"] = calloutStatusRate.toList();
-    }
-    if (cookieMatcherStatusRate != null) {
-      output["cookieMatcherStatusRate"] = cookieMatcherStatusRate.toList();
-    }
-    if (creativeStatusRate != null) {
-      output["creativeStatusRate"] = creativeStatusRate.toList();
-    }
-    if (hostedMatchStatusRate != null) {
-      output["hostedMatchStatusRate"] = hostedMatchStatusRate.toList();
-    }
-    if (kind != null) {
-      output["kind"] = kind;
-    }
-    if (latency50thPercentile != null) {
-      output["latency50thPercentile"] = latency50thPercentile;
-    }
-    if (latency85thPercentile != null) {
-      output["latency85thPercentile"] = latency85thPercentile;
-    }
-    if (latency95thPercentile != null) {
-      output["latency95thPercentile"] = latency95thPercentile;
-    }
-    if (noQuotaInRegion != null) {
-      output["noQuotaInRegion"] = noQuotaInRegion;
-    }
-    if (outOfQuota != null) {
-      output["outOfQuota"] = outOfQuota;
-    }
-    if (pixelMatchRequests != null) {
-      output["pixelMatchRequests"] = pixelMatchRequests;
-    }
-    if (pixelMatchResponses != null) {
-      output["pixelMatchResponses"] = pixelMatchResponses;
-    }
-    if (quotaConfiguredLimit != null) {
-      output["quotaConfiguredLimit"] = quotaConfiguredLimit;
-    }
-    if (quotaThrottledLimit != null) {
-      output["quotaThrottledLimit"] = quotaThrottledLimit;
-    }
-    if (region != null) {
-      output["region"] = region;
-    }
-    if (timestamp != null) {
-      output["timestamp"] = timestamp;
-    }
-
-    return output;
-  }
-
-  /** Return String representation of PerformanceReport */
-  core.String toString() => JSON.encode(this.toJson());
-
-}
-
-/** The configuration data for an Ad Exchange performance report list. https://sites.google.com/a/google.com/adx-integration/Home/engineering/binary-releases/rtb-api-release https://cs.corp.google.com/#piper///depot/google3/contentads/adx/tools/rtb_api/adxrtb.py */
-class PerformanceReportList {
-
-  /** Resource type. */
-  core.String kind;
-
-  /** A list of performance reports relevant for the account. */
-  core.List<PerformanceReport> performance_report;
-
-  /** Create new PerformanceReportList from JSON data */
-  PerformanceReportList.fromJson(core.Map json) {
-    if (json.containsKey("kind")) {
-      kind = json["kind"];
-    }
-    if (json.containsKey("performance_report")) {
-      performance_report = json["performance_report"].map((performance_reportItem) => new PerformanceReport.fromJson(performance_reportItem)).toList();
-    }
-  }
-
-  /** Create JSON Object for PerformanceReportList */
-  core.Map toJson() {
-    var output = new core.Map();
-
-    if (kind != null) {
-      output["kind"] = kind;
-    }
-    if (performance_report != null) {
-      output["performance_report"] = performance_report.map((performance_reportItem) => performance_reportItem.toJson()).toList();
-    }
-
-    return output;
-  }
-
-  /** Return String representation of PerformanceReportList */
   core.String toString() => JSON.encode(this.toJson());
 
 }
